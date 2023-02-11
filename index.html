@@ -16,16 +16,28 @@
             <h2 class="title">Escolha uma opção</h2>
 
             <div class="options">
-                <button onclick="redireciona()">Registrar</button>
-                <button onclick="redireciona()">Ler</button>
-                <button onclick="redireciona()">Atualizar</button>
-                <button onclick="redireciona()">Excluir</button>
+                <button onclick="redireciona1()">Registrar</button>
+                <button onclick="redireciona2()">Ler</button>
+                <button onclick="redireciona3()">Atualizar</button>
+                <button onclick="redireciona4()">Excluir</button>
             </div>
         </section>
 
         <script>
-            function redireciona() {
-                window.location.href = "./back/read.php"
+            function redireciona1() {
+                window.location.href = "./front/create.php"
+            }
+
+            function redireciona2() {
+                window.location.href = "./front/read.php"
+            }
+
+            function redireciona3() {
+                window.location.href = "./front/update.php"
+            }
+
+            function redireciona4() {
+                window.location.href = "./front/delete.php"
             }
         </script>
     </body>
