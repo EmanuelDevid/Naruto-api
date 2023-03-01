@@ -17,30 +17,13 @@
         <section class="main">
             <h2 class="title"><strong>Bem vindo à Bijuus's API</strong></h2>
 
-            <div class="login-area">
+            <form class="login-area" method="POST" action="./front/telaInicial.php">
                 <label for="login">Digite seu login:</label>
                 <input type="text" name="login" id="login">
                 <label for="password">Digite sua senha:</label>
                 <input type="password" name="password" id="password">
-            </div>
+                <button type="submit">Entrar</button>
+            </form>
         </section>
-
-        <script>
-            function redireciona1() {
-                window.location.href = "./front/create.php"
-            }
-
-            function redireciona2() {
-                window.location.href = "./front/read.php"
-            }
-
-            function redireciona3() {
-                window.location.href = "./front/update.php"
-            }
-
-            function redireciona4() {
-                window.location.href = "./front/delete.php"
-            }
-        </script>
     </body>
 </html>
