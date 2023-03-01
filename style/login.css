@@ -1,0 +1,20 @@
+.login-area {
+    display: flex;
+    flex-direction: column;
+
+    width: 90%;
+    height: 75%;
+}
+
+.login-area label {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: .8rem;
+}
+
+.login-area input {
+    border: none;
+    border-radius: .2rem;
+    padding: .5rem;
+    font-size: 1.25rem;
+}
