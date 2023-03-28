@@ -11,7 +11,7 @@
     <body>
         <header class="header">
             <img src="../img/Simbolo_konoha.svg.png" alt="logo">
-            <a href="#">Sair</a>
+            <a href="../back/logoff.php">Sair</a>
         </header>
 
         <section class="main">
