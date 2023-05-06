@@ -1,104 +1,111 @@
 <?php
 
-require_once("Conexao.php");
+require_once("../database/Conexao.php");
 class Bijuu
 {
-    private $nome = null;
-    private $animal = null;
-    private $qtd_caudas = 0;
-    private $jinchuuriki_id = null;
-    private $descricao = null;
-    private $aldeia = null;
-    private $status = null;
-    private $imagem_src = null;
+    private $nome;
+    private $animal;
+    private $qtd_caudas;
+    private $descricao;
+    private $aldeia;
+    private $b_status;
+    private $imagem_src;
+    private $jinchuuriki_id;
+    private $con;
 
-    public function getNome()
+    private function __construct() //inicializando o atributo con com uma conexao com o bd
+    {
+        $con = new Conexao();
+        $this->con = $con->conecta();
+    }
+
+    private function getNome(): string
     {
         return $this->nome;
     }
 
-    public function setNome($nome)
+    private function setNome(string $nome)
     {
         $this->nome = $nome;
         return $this;
     }
 
-    public function getAnimal()
+    private function getAnimal(): string
     {
         return $this->animal;
     }
 
-    public function setAnimal($animal)
+    private function setAnimal(string $animal)
     {
         $this->animal = $animal;
         return $this;
     }
 
-    public function getQuantidade_caudas()
+    private function getQuantidadeCaudas(): int
     {
         return $this->qtd_caudas;
     }
 
-    public function setQuantidade_caudas($quantidade_caudas)
+    private function setQuantidadeCaudas(int $quantidade_caudas)
     {
         $this->qtd_caudas = $quantidade_caudas;
         return $this;
     }
 
-    public function getJinchuuriki()
-    {
-        return $this->jinchuuriki_id;
-    }
-
-    public function setJinchuuriki($jinchuuriki_id)
-    {
-        $this->jinchuuriki_id = $jinchuuriki_id;
-        return $this;
-    }
-
-    public function getDescricao()
+    private function getDescricao(): string
     {
         return $this->descricao;
     }
 
-    public function setDescricao($descricao)
+    private function setDescricao(string $descricao)
     {
         $this->descricao = $descricao;
         return $this;
     }
 
-    public function getAldeia()
+    private function getAldeia(): string
     {
         return $this->aldeia;
     }
 
-    public function setAldeia($aldeia)
+    private function setAldeia(string $aldeia)
     {
         $this->aldeia = $aldeia;
         return $this;
     }
 
-    public function getStatus()
+    private function getStatus(): string
     {
-        return $this->status;
+        return $this->b_status;
     }
 
-    public function setStatus($status)
+    private function setStatus(string $b_status)
     {
-        $this->status = $status;
+        $this->b_status = $b_status;
         return $this;
     }
 
-    function getImagem()
+    function getLinkImagem(): string
     {
         return $this->imagem_src;
     }
 
-    function setImagem($imagem_src)
+    function setLinkImagem(string $imagem_src)
     {
         $this->imagem_src = $imagem_src;
         return $this;
     }
     
+    private function getJinchuuriki(): int
+    {
+        return $this->jinchuuriki_id;
+    }
+
+    private function setJinchuuriki(int $jinchuuriki_id)
+    {
+        $this->jinchuuriki_id = $jinchuuriki_id;
+        return $this;
+    }
+
     
 }
