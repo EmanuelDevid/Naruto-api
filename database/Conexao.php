@@ -2,17 +2,15 @@
 
 class Conexao
 {
-    public function __construct() //quando instanciada, já retorna a conexão com o database
-    {
-        $dbname = "narutoapi";
-        $password = "davidspfcfcb1992-21";
-        $server = "localhost";
-        $user = "root";
+    public $dbname = "narutoapi";
+    public $password = "davidspfcfcb1992-21";
+    public $server = "localhost";
+    public $user = "root";
 
-        try {
-            $pdo = new \PDO("mysql:host=$server;dbname=$dbname", "$user", "$password");
-        } catch(PDOException $erro) {
-            echo "Ocorreu um erro: " . $erro->getMessage();
-        }
+    //função de conexão com o bd
+    public function conecta(): PDO|null
+    {
+        $con = new \PDO("mysql:host=$this->server;dbname=$this->dbname", "$this->user", "$this->password");
+        return $con;
     }
 }
