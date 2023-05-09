@@ -3,83 +3,83 @@
 require_once("../database/Conexao.php");
 class Bijuu
 {
-    private $nome;
-    private $animal;
-    private $qtd_caudas;
-    private $descricao;
-    private $aldeia;
-    private $b_status;
-    private $imagem_src;
-    private $jinchuuriki_id;
-    private $con;
+    public $nome;
+    public $animal;
+    public $qtd_caudas;
+    public $descricao;
+    public $aldeia;
+    public $b_status;
+    public $imagem_src;
+    public $jinchuuriki_id;
+    public $con;
 
-    private function __construct() //inicializando o atributo con com uma conexao com o bd
+    public function __construct() //inicializando o atributo con com uma conexao com o bd
     {
         $con = new Conexao();
         $this->con = $con->conecta();
     }
 
-    private function getNome(): string
+    public function getNome(): string
     {
         return $this->nome;
     }
 
-    private function setNome(string $nome)
+    public function setNome(string $nome)
     {
         $this->nome = $nome;
         return $this;
     }
 
-    private function getAnimal(): string
+    public function getAnimal(): string
     {
         return $this->animal;
     }
 
-    private function setAnimal(string $animal)
+    public function setAnimal(string $animal)
     {
         $this->animal = $animal;
         return $this;
     }
 
-    private function getQuantidadeCaudas(): int
+    public function getQuantidadeCaudas(): int
     {
         return $this->qtd_caudas;
     }
 
-    private function setQuantidadeCaudas(int $quantidade_caudas)
+    public function setQuantidadeCaudas(int $quantidade_caudas)
     {
         $this->qtd_caudas = $quantidade_caudas;
         return $this;
     }
 
-    private function getDescricao(): string
+    public function getDescricao(): string
     {
         return $this->descricao;
     }
 
-    private function setDescricao(string $descricao)
+    public function setDescricao(string $descricao)
     {
         $this->descricao = $descricao;
         return $this;
     }
 
-    private function getAldeia(): string
+    public function getAldeia(): string
     {
         return $this->aldeia;
     }
 
-    private function setAldeia(string $aldeia)
+    public function setAldeia(string $aldeia)
     {
         $this->aldeia = $aldeia;
         return $this;
     }
 
-    private function getStatus(): string
+    public function getStatus(): string
     {
         return $this->b_status;
     }
 
-    private function setStatus(string $b_status)
+    public function setStatus(string $b_status)
     {
         $this->b_status = $b_status;
         return $this;
@@ -96,12 +96,12 @@ class Bijuu
         return $this;
     }
     
-    private function getJinchuuriki(): int
+    public function getJinchuuriki(): int
     {
         return $this->jinchuuriki_id;
     }
 
-    private function setJinchuuriki(int $jinchuuriki_id)
+    public function setJinchuuriki(int $jinchuuriki_id)
     {
         $this->jinchuuriki_id = $jinchuuriki_id;
         return $this;
