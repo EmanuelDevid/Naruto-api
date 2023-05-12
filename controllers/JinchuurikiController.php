@@ -33,7 +33,14 @@ class JinchuurikiController {
 
     public function create()
     {
+        //retorna o json recebido
         return $this->jinchuuriki->create();
+    }
+
+    public function read()
+    {
+        //transformando o array associativo recebido em json
+        return json_encode($this->jinchuuriki->read());
     }
 }
 

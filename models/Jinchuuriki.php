@@ -86,6 +86,24 @@ class Jinchuuriki
         return $this->response($query, "Jinchuuriki cadastrado com sucesso!", "Erro ao cadastrar jinchuuriki", 201, 400);
     }
 
+    public function read()
+    {
+        $query = "SELECT * FROM jinchuuriki";
+
+        if($this->id !== null){
+            $clausulaWhere = " WHERE id = $this->id";
+            $query = $query . $clausulaWhere; //especificando o id que se deseja ler, caso seja passado
+        }
+
+        $stmt = $this->con->prepare($query);
+        if($stmt->execute()){
+            $retorno = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $stmt = null; //fechando conexão
+            http_response_code(200);
+            return $retorno; //retornando um array associativo
+        }
+    }
+
     public function response(string $query, string $msg_ok, string $msg_erro, int $code_response_ok, int $code_response_erro)
     {
         $stmt = $this->con->prepare($query); //preparando a query recebida para ser executada
