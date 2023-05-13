@@ -25,6 +25,8 @@ class JinchuurikiController {
             $jinchuuriki->setLinkImage($data['link_img']);
         }
         if(isset($data['id'])){
+            //convertendo o valor do id para inteiro
+            $data['id'] = intval($data['id']);
             $jinchuuriki->setId($data['id']);
         }
 

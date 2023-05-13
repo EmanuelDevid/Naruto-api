@@ -81,9 +81,29 @@ class Jinchuuriki
     public function create() //função responsável por criar um novo registro na tabela juchuuriki
     {
         $query = "INSERT INTO jinchuuriki (nome, aldeia, j_status, ponto_forte, link_img) VALUES
-        ('$this->nome','$this->aldeia','$this->j_status','$this->ponto_forte','$this->link_img');";
+        (:nome,:aldeia,:jStatus,:pontoForte,:linkImg);";
 
-        return $this->response($query, "Jinchuuriki cadastrado com sucesso!", "Erro ao cadastrar jinchuuriki", 201, 400);
+        $stmt = $this->con->prepare($query);
+        
+        //fazendo a substituição dos marcadores por seus valores adequados
+        $stmt->bindValue(':nome', $this->getNome());
+        $stmt->bindValue(':aldeia', $this->getAldeia());
+        $stmt->bindValue(':jStatus', $this->getStatus());
+        $stmt->bindValue(':pontoForte', $this->getPontoForte());
+        $stmt->bindValue(':linkImg', $this->getLinkImage());
+
+        if($stmt->execute()){//execuntando a query
+            http_response_code(201);
+            $stmt = null; //fechando a conexão
+
+            $array_retorno = ['status' => true, 'message' => 'Jinchuuriki cadastrado com sucesso'];
+            return json_encode($array_retorno); //retorna um json
+        }
+        http_response_code(400);
+        $error = $stmt->errorInfo(); //pegando o erro, caso haja
+        $stmt = null; //fechando a conexão
+        $array_retorno = ['status' => false, 'message' => 'Erro ao cadastrar jinchuuriki' . ": " . $error];
+        return json_encode($array_retorno); //retorna um json
     }
 
     public function read()
@@ -91,35 +111,22 @@ class Jinchuuriki
         $query = "SELECT * FROM jinchuuriki";
 
         if($this->id !== null){
-            $clausulaWhere = " WHERE id = $this->id";
+            $clausulaWhere = " WHERE id = :id";
             $query = $query . $clausulaWhere; //especificando o id que se deseja ler, caso seja passado
         }
 
         $stmt = $this->con->prepare($query);
+
+        if($this->id !== null){
+            //substituindo o marcador ':id' pelo o id da instância em questão
+            $stmt->bindValue(':id',$this->getId());
+        }
         if($stmt->execute()){
             $retorno = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             $stmt = null; //fechando conexão
             http_response_code(200);
             return $retorno; //retornando um array associativo
         }
-    }
-
-    public function response(string $query, string $msg_ok, string $msg_erro, int $code_response_ok, int $code_response_erro)
-    {
-        $stmt = $this->con->prepare($query); //preparando a query recebida para ser executada
-        if($stmt->execute()){ //executando a query
-            http_response_code($code_response_ok);
-            $stmt = null; //fechando a conexão
-
-            $array_retorno = ['status' => true, 'message' => $msg_ok];
-            return json_encode($array_retorno); //retorna um json
-        }
-
-        http_response_code($code_response_erro);
-        $error = $stmt->errorInfo(); //pegando o erro, caso haja
-        $stmt = null; //fechando a conexão
-        $array_retorno = ['status' => false, 'message' => $msg_erro . ": " . $error];
-        return json_encode($array_retorno); //retorna um json
     }
 }
 
