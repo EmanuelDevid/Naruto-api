@@ -55,6 +55,17 @@ class JinchuurikiController {
         //retorna o json recebido
         return $this->jinchuuriki->update();
     }
+
+    public function delete()
+    {
+        if($this->jinchuuriki->id === null){//tratando o erro: caso o id não seja informado
+            http_response_code(400);
+            return json_encode(['status' => false, 'message' => 'ID não informado']);
+        }
+
+        //retorna o json recebido
+        return $this->jinchuuriki->delete();
+    }
 }
 
 ?>

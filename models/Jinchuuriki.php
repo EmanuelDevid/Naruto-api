@@ -18,7 +18,7 @@ class Jinchuuriki
         $this->con = $con->conecta();
     }
 
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }
@@ -134,7 +134,7 @@ class Jinchuuriki
         $set = array(); //cria um array
 
         //monta a query sql de acordo com os campos informados
-        if($this->getNome() !== null){
+        if(!empty($this->getNome())){
             $set[] = "nome=:nome";
         }
         if(!empty($this->getAldeia())){
@@ -185,6 +185,29 @@ class Jinchuuriki
         $error = $stmt->errorInfo(); //pegando o erro, caso haja
         $stmt = null; //fechando a conexão
         $array_retorno = ['status' => false, 'message' => 'Erro ao atualizar jinchuuriki' . ": " . $error];
+        return json_encode($array_retorno); //retorna um json
+    }
+
+    public function delete()
+    {
+        $query = "DELETE FROM jinchuuriki WHERE id = :id";
+
+        $stmt = $this->con->prepare($query);
+
+        //substituindo o marcador :id pelo atributo id
+        $stmt->bindValue(':id', $this->getId());
+
+        if($stmt->execute()){//execuntando a query
+            http_response_code(200);
+            $stmt = null; //fechando a conexão
+
+            $array_retorno = ['status' => true, 'message' => 'Jinchuuriki removido com sucesso'];
+            return json_encode($array_retorno); //retorna um json
+        }
+        http_response_code(400);
+        $error = $stmt->errorInfo(); //pegando o erro, caso haja
+        $stmt = null; //fechando a conexão
+        $array_retorno = ['status' => false, 'message' => 'Erro ao remover jinchuuriki' . ": " . $error];
         return json_encode($array_retorno); //retorna um json
     }
 }
