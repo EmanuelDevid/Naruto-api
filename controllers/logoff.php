@@ -7,6 +7,6 @@
     session_destroy();
 
     //redireciona para a tela inicial
-    header("Location: ../views/index.html");
+    header("Location: ../views");
 
 ?>

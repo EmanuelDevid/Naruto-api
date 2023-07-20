@@ -24,7 +24,7 @@
     if($_SESSION['autenticado'] === 'true'){
         header('Location: ../views/telaInicial.php');
     } else{
-        header("Location: ../views/index.html?login=erro");
+        header("Location: ../views?login=erro");
     }
 
 ?>

@@ -2,10 +2,10 @@
 
 class Conexao
 {
-    public $dbname = "narutoapi";
-    public $password = "davidspfcfcb1992-21";
-    public $server = "localhost";
-    public $user = "root";
+    public $dbname = "apinaruto";
+    public $password = "1006332707";
+    public $server = "db4free.net";
+    public $user = "emanuel_devid415";
 
     //função de conexão com o bd
     public function conecta(): PDO|null
