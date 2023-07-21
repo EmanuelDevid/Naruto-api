@@ -13,30 +13,30 @@ class BijuuController {
             $bijuu->setNome($data['nome']);
         }
         if(isset($data['animal'])){
-            $bijuu->setAldeia($data['animal']);
+            $bijuu->setAnimal($data['animal']);
         }
         if(isset($data['descricao'])){
-            $bijuu->setPontoForte($data['descricao']);
+            $bijuu->setDescricao($data['descricao']);
         }
         if(isset($data['aldeia'])){
             $bijuu->setAldeia($data['aldeia']);
         }
         if(isset($data['b_status'])){
-            $bijuu->setStatus($data['j_status']);
+            $bijuu->setStatus($data['b_status']);
         }
         if(isset($data['link_img'])){
-            $bijuu->setLinkImage($data['link_img']);
+            $bijuu->setLinkImagem($data['link_img']);
         }
         if(isset($data['jinchuuriki_id'])){
-            $bijuu->setLinkImage($data['jinchuuriki_id']);
+            $bijuu->setJinchuuriki($data['jinchuuriki_id']);
         }
         if(isset($data['animal'])){
-            $bijuu->setLinkImage($data['animal']);
+            $bijuu->setAnimal($data['animal']);
         }
         if(isset($data['qtd_caudas'])){
             //convertendo o valor dde qtd_caudas para inteiro
             $data['qtd_caudas'] = intval($data['qtd_caudas']);
-            $bijuu->setId($data['qtd_caudas']);
+            $bijuu->setQuantidadeCaudas($data['qtd_caudas']);
         }
 
         $this->bijuu = $bijuu;
