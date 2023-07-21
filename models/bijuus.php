@@ -9,7 +9,7 @@ class Bijuu
     public $descricao;
     public $aldeia;
     public $b_status;
-    public $imagem_src;
+    public $link_img;
     public $jinchuuriki_id;
     public $con;
 
@@ -87,12 +87,12 @@ class Bijuu
 
     function getLinkImagem(): string
     {
-        return $this->imagem_src;
+        return $this->link_img;
     }
 
-    function setLinkImagem(string $imagem_src)
+    function setLinkImagem(string $link_img)
     {
-        $this->imagem_src = $imagem_src;
+        $this->link_img = $link_img;
         return $this;
     }
     
