@@ -131,5 +131,28 @@ class Bijuu
         $array_retorno = ['status' => false, 'message' => 'Erro ao cadastrar Bijuu' . ": " . $error];
         return json_encode($array_retorno); //retorna um json
     }
+
+    public function read()
+    {
+        $query = "SELECT * FROM bijuus";
+
+        if($this->getQuantidadeCaudas() !== null){
+            $clausulaWhere = " WHERE qtd_caudas = :qtd_caudas";
+            $query = $query . $clausulaWhere; //especificando a qtd_caudas que se deseja ler, caso seja passado
+        }
+
+        $stmt = $this->con->prepare($query);
+
+        if($this->getQuantidadeCaudas() !== null){
+            //substituindo o marcador ':qtd_caudas' pela a qtd_caudas da instância em questão
+            $stmt->bindValue(':qtd_caudas',$this->getQuantidadeCaudas());
+        }
+        if($stmt->execute()){
+            $retorno = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $stmt = null; //fechando conexão
+            http_response_code(200);
+            return $retorno; //retornando um array associativo
+        }
+    }
     
 }
