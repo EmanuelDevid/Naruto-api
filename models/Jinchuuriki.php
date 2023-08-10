@@ -146,9 +146,6 @@ class Jinchuuriki
         if(!empty($this->getPontoForte())){
             $set[] = "ponto_forte = :pontoForte";
         }
-        if(!empty($this->getLinkImage())){
-            $set[] = "link_img = :linkImg";
-        }
 
         //juntando todos os dados do array em uma string, separados por vírgula
         $string = implode(",", $set);

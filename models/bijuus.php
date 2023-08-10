@@ -155,4 +155,68 @@ class Bijuu
         }
     }
     
+    public function update()
+    {
+        $set = array(); //cria um array
+
+        //monta a query sql de acordo com os campos informados
+        if(!empty($this->getNome())){
+            $set[] = "nome=:nome";
+        }
+        if(!empty($this->getAnimal())){
+            $set[] = "animal = :animal";
+        }
+        if(!empty($this->getAldeia())){
+            $set[] = "aldeia = :aldeia";
+        }
+        if(!empty($this->getStatus())){
+            $set[] = "b_status = :b_status";
+        }
+        if(!empty($this->getDescricao())){
+            $set[] = "descricao = :descricao";
+        }
+        if(!empty($this->getJinchuuriki())){
+            $set[] = "jinchuuriki_id = :jinchuuriki_id";
+        }
+
+        //juntando todos os dados do array em uma string, separados por vírgula
+        $string = implode(",", $set);
+        $query = "UPDATE bijuus SET " . $string. " WHERE qtd_caudas = :qtd_caudas";
+
+        $stmt = $this->con->prepare($query); //preparando a query
+
+        //fazendo a substituição dos marcadores por seus valores adequados
+        if(!empty($this->getNome())){
+            $stmt->bindValue(':nome', $this->getNome());
+        }
+        if(!empty($this->getAnimal())){
+            $stmt->bindValue(':animal', $this->getAnimal());
+        }
+        if(!empty($this->getAldeia())){
+            $stmt->bindValue(':aldeia', $this->getAldeia());
+        }
+        if(!empty($this->getStatus())){
+            $stmt->bindValue(':b_status', $this->getStatus());
+        }
+        if(!empty($this->getDescricao())){
+            $stmt->bindValue(':descricao', $this->getDescricao());
+        }
+        if(!empty($this->getJinchuuriki())){
+            $stmt->bindValue(':jinchuuriki_id', $this->getJinchuuriki());
+        }
+        $stmt->bindValue(':qtd_caudas', $this->getQuantidadeCaudas()); //a inicialização da qtd_caudas é grantida pelo Controller
+
+        if($stmt->execute()){//execuntando a query
+            http_response_code(201);
+            $stmt = null; //fechando a conexão
+
+            $array_retorno = ['status' => true, 'message' => 'Bijuu atualizada com sucesso'];
+            return json_encode($array_retorno); //retorna um json
+        }
+        http_response_code(400);
+        $error = $stmt->errorInfo(); //pegando o erro, caso haja
+        $stmt = null; //fechando a conexão
+        $array_retorno = ['status' => false, 'message' => 'Erro ao atualizar bijuu' . ": " . $error];
+        return json_encode($array_retorno); //retorna um json
+    }
 }
