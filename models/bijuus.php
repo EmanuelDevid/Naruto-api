@@ -219,4 +219,27 @@ class Bijuu
         $array_retorno = ['status' => false, 'message' => 'Erro ao atualizar bijuu' . ": " . $error];
         return json_encode($array_retorno); //retorna um json
     }
+
+    public function delete()
+    {
+        $query = "DELETE FROM bijuus WHERE qtd_caudas = :qtd_caudas";
+
+        $stmt = $this->con->prepare($query);
+
+        //substituindo o marcador :id pelo atributo id
+        $stmt->bindValue(':qtd_caudas', $this->getQuantidadeCaudas());
+
+        if($stmt->execute()){//execuntando a query
+            http_response_code(200);
+            $stmt = null; //fechando a conexão
+
+            $array_retorno = ['status' => true, 'message' => 'Bijuu removida com sucesso'];
+            return json_encode($array_retorno); //retorna um json
+        }
+        http_response_code(400);
+        $error = $stmt->errorInfo(); //pegando o erro, caso haja
+        $stmt = null; //fechando a conexão
+        $array_retorno = ['status' => false, 'message' => 'Erro ao remover bijuu' . ": " . $error];
+        return json_encode($array_retorno); //retorna um json
+    }
 }
